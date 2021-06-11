@@ -1,0 +1,26 @@
+{% extends "encyclopedia/layout.html" %}
+
+{% block title %}
+    {{ Title }}
+{% endblock %}
+
+{% block body %}
+
+    <!-- Put content rendered by .get_entry here-->
+    {% if site == "None" %}
+        <h3>The page about {{ Title }} does not exist</h3>
+    {% else %}
+
+        {{ site|safe }}
+            
+    {% endif %}
+
+    <form action="{% url 'editpage' %}" method="post">
+        {% csrf_token %}
+        <input name="title" type="hidden" value="{{ Title }}">
+        <input name="content" type="hidden" value="{{ md }}">
+        <input name="f_editing" type="hidden" value="no">
+        <button type="submit">Edit Page</button>
+    </form>
+
+{% endblock %}

@@ -1,0 +1,24 @@
+{% extends "encyclopedia/layout.html" %}
+
+{% block title %}
+    Add New Page
+{% endblock %}
+
+{% block body %}
+    {% if errorcode == 1 %}
+    <h3 style="color:red;">Error! There was already an entry with the title {{ title }}. Please try again.</h3>
+    {% endif %}
+    <h1>Create a new page</h1>
+    
+    <form action="{% url 'newpage' %}" method="post">
+        {% csrf_token %}
+        <div>Title of new page</div>
+        <input type="text" name="newtitle" placeholder="Please enter title here">
+    
+        <div>Content of new page (in Markdown)</div>
+        <textarea name="newcontent" placeholder="Please enter content of new page in Markdown here"></textarea>
+        <div><button type="submit">Save</button></div>
+    </form>
+
+
+{% endblock %}
